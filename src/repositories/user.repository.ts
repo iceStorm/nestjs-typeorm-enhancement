@@ -1,3 +1,4 @@
+import { query } from 'express'
 import BaseRepository from '~/base/base.repository.js'
 import { User, UserEntity } from '~/entities/user.entity.js'
 
@@ -10,6 +11,8 @@ export default class UserRepository extends BaseRepository(User) {
       .getMany()
   }
 
+  // https://typeorm.io/transactions
+  // https://docs.nestjs.com/techniques/database#typeorm-transactions
   // https://typeorm.io/custom-repository#using-custom-repositories-in-transactions
   tryTransaction() {
     // dataSource is a dependency of BaseRepository | auto injected by the NestJS DI system

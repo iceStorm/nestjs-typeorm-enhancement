@@ -8,8 +8,11 @@ const BaseRepository = <TEntity>(entity: EntityTarget<TEntity>) => {
   @Injectable()
   class BaseRepositoryHost extends Repository<TEntity> {
     constructor(readonly dataSource: DataSource) {
-      super(entity, dataSource.createEntityManager())
+      const repo = dataSource.getRepository(entity)
+      super(repo.target, repo.manager, repo.queryRunner)
     }
+
+    // HINT: add other common methods here
   }
 
   return BaseRepositoryHost
